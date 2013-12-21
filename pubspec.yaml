@@ -1,0 +1,6 @@
+name: DartSimulator
+description: A sample web application
+dependencies:
+  browser: any
+  parsers: any
+  webdriver: any
