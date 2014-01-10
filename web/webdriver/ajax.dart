@@ -11,6 +11,7 @@ abstract class WebDriverAjax{
     req.onReadyStateChange.listen((_){
       if(req.readyState == HttpRequest.DONE){
         if(req.status == 200){
+          print(req.responseText);
           int index = req.responseText.lastIndexOf("}");
           String response = req.responseText.substring(0, index+1);
           Map responseMap = JSON.decode(response);

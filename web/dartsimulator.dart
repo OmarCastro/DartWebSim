@@ -1,13 +1,27 @@
-import 'dart:html';
-import 'scenario/scenario.dart';
-import 'webdriver/selenium_webdriver.dart';
-import 'workspace/scenario_div.dart';
-//import 'package:webdriver/webdriver.dart';
+/* 
+ *  DartWebSim a a web application to create web acceptance tests or to simulate commands 
+ * 
+ *  Copyright (c) 2013 Omar Castro 
+ */
 
+import 'dart:html';
+import 'workspace/scenario_div.dart';
+import 'package:ace/ace.dart' as ace;
 
 
 
 void main() {
+  
+  ace.require('ace/ext/language_tools');
+  
+  ace.Editor editor = ace.edit(querySelector('#editor'))
+  
+  ..theme = new ace.Theme('ace/theme/twilight')
+  ..session.mode = new ace.Mode('ace/mode/websim')
+  ..setOptions({
+    'enableBasicAutocompletion' : true,
+    'enableSnippets' : true
+  });  
   
   Element runButton = querySelector("#runtests");
   Element fileButton = querySelector("#file");
@@ -15,26 +29,10 @@ void main() {
   loadButton.onClick.listen((_){fileButton.click();});
   runButton.onClick.listen((ev){
     
-    ScenarioHtml.runScenario(querySelector(".TestWorkspace"));
-/*
-    
-    var driver = new WebDriver('http://localhost:4444/wd/hub');
-    driver.newSession().then((WebDriverSession session){
-      
-      
-      /*Scenario scenario = new Scenario()..session=session;
-      ScenarioUser I = scenario.as("Genius");
-      
-      I.goToPage("http://www.google.com");
-      ScenarioElement searchBox = I.getElement.ofName("q");
-      //ScenarioElement searchButton = I.getElement.ofName("btnK");
-  
-      I.write("hello").on(searchBox);
-      I.wait(const Duration(seconds: 3));
-      scenario.start();*/
-    });*/
+    ScenarioHtml.runScenario(editor.value);
+
   });
-  ScenarioHtml.addScenario();
+
 
 }
 

@@ -8,16 +8,31 @@
   </head>
   <body>     
       <div class="navbar">
-          <span class="navButton" id="runtests">run</span>
+          <span class="navButton" id="runtests">run All</span>
           <span class="navButton" id="newScenario">New Scenario</span>
           <span class="navButton" id="loadButton"> Load File <input type="file" id="file" name="files[]"/></span>
-          
         </div> 
         
       <div class="TestWorkspace">
-        
+        <div class="test-list">
+          
+        </div>
+        <div id="editor">I go to page http://google.com
+I get element of name q
+It is visible
+I write hello world\n
+I wait 3 seconds
+I get element of xpath //a[contains(text(),"Programa Olá Mundo")]
+It is visible
+I click it
+I wait 3 seconds
+</div>
       </div>
-    </div>
+    <script type="text/javascript" src="packages/ace/src/js/ace.js"></script>  
+    <script type="text/javascript" src="packages/ace/src/js/ext-language_tools.js"></script>  
+    <script type="text/javascript" src="mode-websim.js"></script>  
+    <script type="text/javascript" src="snippets-websim.js"></script>  
+    
     <script type="application/dart" src="dartsimulator.dart"></script>
     <script src="packages/browser/dart.js"></script>
   </body>

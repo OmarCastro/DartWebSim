@@ -12,13 +12,16 @@ class ScenarioElement{
   String elementId;
   Completer completer;
   ScenarioElement(this.step){and = this;}
+  void addSubstep(ScenarioElementStep a) => substeps.add(a);
+
+  void addSubsteps(Iterable<ScenarioElementStep> a) => substeps.addAll(a);
   void isDisplayed() => substeps.add(new VisibilityElementStep(true));
   void isntDisplayed() => substeps.add(new VisibilityElementStep(false));
   void containsText(Pattern pattern)
     => substeps.add(new SearchTextElementStep(pattern,true));
   
   void doesntContainText(Pattern pattern)
-    => substeps.add(new SearchTextElementStep(pattern,true));
+    => substeps.add(new SearchTextElementStep(pattern,false));
 
   
   Future run(WebDriverSession session,String strategy, String value){
@@ -50,6 +53,9 @@ class ScenarioElement{
 abstract class ScenarioElementStep{
   Future run(WebDriverSession session, String id);
 }
+
+
+
 class VisibilityElementStep extends ScenarioElementStep{
   Pattern pattern;
   bool trueOnVisible;
@@ -57,7 +63,11 @@ class VisibilityElementStep extends ScenarioElementStep{
   Future run(WebDriverSession session, String id){
     Completer completer = new Completer();
     session.isDiplayed(id).then((bool isVisible){
-      completer.complete(trueOnVisible ? isVisible : !isVisible);
+      print(isVisible);
+
+      bool correct = trueOnVisible ? isVisible : !isVisible;
+      print("It is ${!correct ? "NOT ":""}${trueOnVisible ? "visible":"invisible"}");
+      completer.complete(correct);
     });
     return completer.future;
   }
@@ -72,6 +82,17 @@ class SearchTextElementStep extends ScenarioElementStep{
     session.getElementText(id).then((String text){
       bool contains = text.contains(pattern);
       completer.complete(trueIfContains ? contains : !contains);
+    });
+    return completer.future;
+  }
+}
+
+class ClickElementStep extends ScenarioElementStep{
+  ClickElementStep();
+  Future run(WebDriverSession session, String id){
+    Completer completer = new Completer();
+    session.clickElement(id).then((value){
+      completer.complete(true);
     });
     return completer.future;
   }

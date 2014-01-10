@@ -1,5 +1,4 @@
 library testScenario;
-import 'dart:html';
 import 'dart:async';
 import '../webdriver/selenium_webdriver.dart';
 
@@ -60,8 +59,6 @@ class ScenarioUser{
 
 abstract class ScenarioStep{
   Future run(ScenarioUser user);
-  String code();
-  String highligthedCode();
 }
 
 class GoToUrlStep extends ScenarioStep{
@@ -92,6 +89,7 @@ class WriteStep extends ScenarioStep{
   ScenarioElement _element;
   List<String> keys;
   WriteStep(String this.content){
+    content = content.split("\\n").join("\n");
     keys = content.split("");
   }
   void on(ScenarioElement element){_element = element;}

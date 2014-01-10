@@ -42,8 +42,31 @@
 }
     
 .TestWorkspace{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: line wrap;
+
   -webkit-flex: 6 1 90%;
   flex: 5 1 80%;
+  -webkit-order: 2;
+  order: 2;
+}
+
+
+
+#editor{
+    -webkit-flex: 5 1 80%;
+  flex: 5 1 80%;
+  -webkit-order: 2;
+  order: 2;
+}
+
+.test-list{
+    -webkit-flex: 1 1 20%;
+  flex: 1 1 20%;
   -webkit-order: 2;
   order: 2;
 }
@@ -55,6 +78,8 @@
   opacity: 1 !important;
   overflow: hidden !important;
 }
+
+
 body{
   margin: 0; 
   background-color: #71ADD0;
@@ -71,50 +96,3 @@ body{
   height: 100vh;
 }
 
-
-.scenario{
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-flow: row wrap;
-  flex-flow: row wrap;
-}
-
-.scenario .comment{
-  flex: 1 1 20%;
-  background-color: #3A4116;
-  min-width: 20em;
-  color: white;
-  
-}
-
-.scenario .steps{
-  flex: 5 1 20%;
-}
-
-.scenario .content{
-  width: 100%;
-  font-weight: bold;
-  background-color: white;
-}
-
-.scenario .selector{
-  color:green; 
-}
-
-.scenario .str{
-  color:blue; 
-}
-
-.scenario .number{
-  color:#8840BF; 
-}
-.scenario .attribute{
-  color:brown; 
-}
-
-.scenario .syntax-error{
-  color: #A83847;
-}

@@ -7,8 +7,8 @@ final dquotestring = dquotestringToken ^ (_,str,s) => str.join();
 final unquotestring = unquotestringToken ^(List txt)=>txt.join();
 
 
-final quotestringToken  = (oneOf('"') + noneOf('\n"').many1 + oneOf('"').maybe);
-final dquotestringToken = (oneOf("'") + noneOf("\n'").many1 + oneOf("'").maybe);
+final quotestringToken  = (oneOf('"') + unquotestringToken + oneOf('"').maybe);
+final dquotestringToken = (oneOf("'") + unquotestringToken + oneOf("'").maybe);
 final unquotestringToken = noneOf('\n').many1;
 
 final integerToken = digit.many1 ^ (number) => int.parse(number.join());

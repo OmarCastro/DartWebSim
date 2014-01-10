@@ -1,3 +1,10 @@
+/*
+ * Web-based webdriver uses ajax to communicate with the selenium webdriver
+ * 
+ * Copyright (c) 2013 Omar Castro 
+ */
+
+
 library webdriver;
 import 'dart:html';
 import 'dart:async';
