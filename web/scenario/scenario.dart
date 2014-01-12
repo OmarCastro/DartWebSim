@@ -76,11 +76,13 @@ class GetElementStep extends ScenarioStep{
     element = new ScenarioElement(this);
   }
   
-  ScenarioElement ofName(String name){strategy = "name";value = name; return element;}
-  ScenarioElement ofCssSelector(String css){strategy = "css selector";value = css; return element;}
-  ScenarioElement ofID(String id){strategy = "id";value = id; return element;}
-  ScenarioElement ofXPath(String xpath){strategy = "xpath";value = xpath; return element;}
-  ScenarioElement byClassName(String className){strategy = "class name"; value = className; return element;}
+  ScenarioElement ofName(String name){          strategy = "name"                 ;value = name; return element;}
+  ScenarioElement ofCssSelector(String css){    strategy = "css selector"         ;value = css; return element;}
+  ScenarioElement ofID(String id){              strategy = "id"                   ;value = id; return element;}
+  ScenarioElement ofXPath(String xpath){        strategy = "xpath"                ;value = xpath; return element;}
+  ScenarioElement ofTag(String tag){            strategy = "tag"                  ;value = tag; return element;}
+  ScenarioElement byClassName(String className){strategy = "class name"           ;value = className; return element;}
+  ScenarioElement anchorText(String text,bool partial){strategy = "${partial?"partial ":""}link text";value = text; return element;}
   Future run(ScenarioUser user) => element.run(user.session,strategy, value);
 }
 

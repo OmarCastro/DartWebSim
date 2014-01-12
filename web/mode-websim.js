@@ -45,7 +45,7 @@ var StartToken_It = {
                 regex: "^It",
                 next: "condition",
                 caseInsensitive: false
-            };            
+            };
 
    this.$rules = {
         "start" : [StartToken_It,StartToken_I],
@@ -57,6 +57,10 @@ var StartToken_It = {
             token: "keyword",
             regex: "get element of",
             next: "elget"
+            },{
+            token: ["keyword","keyword","keyword","string"],
+            regex: /(get link with )(exact )?(text )(.+)/,
+            next: "start"
             },{
             token: ["keyword", "string"],
             regex: "(write\\ )(.+)",
@@ -73,7 +77,7 @@ var StartToken_It = {
 
         ],
         "condition":[{
-        	token: "keyword",
+            token: "keyword",
             regex: /is visible/,
             next: "start"
         }],
@@ -85,17 +89,17 @@ var StartToken_It = {
         }],
         
         "elget" : [{
-            token: ["variable.parameter","variable.parameter","string"], 
+            token: ["variable.parameter","variable.parameter","string"],
             regex: /(Id)|(name)(\ [_a-z0-9-]*)/,
             next: "start",
             caseInsensitive: true
         }, {
-            token: "variable.parameter",  
+            token: "variable.parameter",
             regex: /css/,
             next: "css",
             caseInsensitive: true
         }, {
-            token: "variable.parameter",  
+            token: "variable.parameter",
             regex: /xpath/,
             next: "xpath",
             caseInsensitive: true
@@ -139,7 +143,7 @@ var StartToken_It = {
     
     this.normalizeRules();
     
-}
+};
 
 oop.inherits(WebSimHighlightRules, TextHighlightRules);
 

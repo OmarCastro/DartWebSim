@@ -5,7 +5,10 @@
  */
 
 import 'dart:html';
-import 'workspace/scenario_div.dart';
+import 'package:parsers/parsers.dart';
+import 'workspace/scenario_parser.dart';
+import 'scenario/scenario.dart';
+import 'webdriver/selenium_webdriver.dart';
 import 'package:ace/ace.dart' as ace;
 
 
@@ -28,9 +31,25 @@ void main() {
   Element loadButton = querySelector("#loadButton");
   loadButton.onClick.listen((_){fileButton.click();});
   runButton.onClick.listen((ev){
-    
-    ScenarioHtml.runScenario(editor.value);
+    final ParseResult result = scenarioParser.run(editor.value);
+    if(result.isSuccess){
+      print(result.value);
 
+      var driver = new WebDriver('http://localhost:4444/wd/hub');
+      driver.newSession().then((WebDriverSession session){
+        Scenario scenario = new Scenario()..session=session;
+        var user = scenario.as("user");
+          user.steps = result.value;
+          scenario.start(); 
+      });
+    } else {
+      editor.session.annotations = 
+          [new ace.Annotation(row: result.position.line-1,
+                              text: result.errorMessage,
+                              type: ace.Annotation.ERROR),
+           ];
+    }
+    
   });
 
 

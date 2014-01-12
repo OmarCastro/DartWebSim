@@ -15,7 +15,13 @@ abstract class WebDriverAjax{
           int index = req.responseText.lastIndexOf("}");
           String response = req.responseText.substring(0, index+1);
           Map responseMap = JSON.decode(response);
-          completer.complete(parseValue ? responseMap['value'] : responseMap); 
+          if(responseMap["status"] != 0){
+            String msg = responseMap['value']['message'];
+            print(msg.substring(0, msg.indexOf("Capabilities"))); 
+            completer.complete(null); 
+          } else {
+            completer.complete(parseValue ? responseMap['value'] : responseMap); 
+          }
         }
       }
     });
