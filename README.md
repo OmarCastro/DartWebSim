@@ -9,7 +9,7 @@ It runs in a web browser and it connects to a selenium server
 
 Selenium is an aplication that automates browsers
 
-here is an exaple of a code
+here is an exmaple of a test code
 
     I go to page http://google.com
     I get element of name q
